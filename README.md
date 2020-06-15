@@ -1,5 +1,5 @@
 ## Animation Training
-In this particular project, I will expand my knowledge about awesome React-spring animations and modern CSS.
+In this particular project/playground, I will expand my knowledge about awesome React-spring animations and modern CSS.
 
 ## Project created with:
 * React
