@@ -1,38 +1,98 @@
-.App {
-  text-align: center;
+html{
+  /*cursor: none;*/
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.hooks-main {
+  position: absolute;
+  z-index: 3;
+  width: 100%;
+  height: 100%;
+  /*filter: url('#goo');*/
+  overflow: hidden;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.hooks-main > div {
+  /*puts all elements in same place - otherwise will be drop like bag*/
+  position: absolute;
+  /*Browsers may set up optimizations before an element is actually changed.*/
+  /*will-change: transform;*/
+  border-radius: 100%;
+  background: rgb(0,39,255);
+  background: linear-gradient(321deg, cornflowerblue 0%, white 100%);
+  /*box-shadow: 10px 10px 5px 0 blue;*/
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.hooks-main > div:nth-child(1) {
+  height: 30px;
+  width: 30px;
+}
+
+.hooks-main > div:nth-child(2) {
+  width: 20px;
+  height: 20px;
+}
+
+.hooks-main > div:nth-child(3) {
+  width: 10px;
+  height: 10px;
+}
+
+.hooks-main > div:nth-child(4) {
+  width: 150px;
+  height: 150px;
+}
+.hooks-main > div:nth-child(5) {
+  width: 150px;
+  height: 150px;
+}
+
+/*.hooks-main > div::after {*/
+/*  content: '';*/
+/*  position: absolute;*/
+/*  top: 20px;*/
+/*  left: 20px;*/
+/*  width: 40px;*/
+/*  height: 40px;*/
+/*  border-radius: 50%;*/
+/*  background: rgba(255, 255, 255, 0.8);*/
+/*}*/
+
+.card__container{
   display: flex;
-  flex-direction: column;
+  height: 100vh;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.card{
+  margin: 20px;
+  width: 300px;
+  height: 300px;
+}
+.card:hover {
+  box-shadow: 10px 10px 1px blue;
+}
+.card img {
+  height: 100%;
+  width: 100%;
+}
+.card p {
+  text-align: center;
+  margin: 0;
+  font-weight: 800;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
+
+/*.hooks-main > div:nth-child(2)::after {*/
+/*  top: 70px;*/
+/*  left: 70px;*/
+/*  width: 70px;*/
+/*  height: 70px;*/
+/*}*/
+
+/*.hooks-main > div:nth-child(3)::after {*/
+/*  top: 50px;*/
+/*  left: 50px;*/
+/*  width: 50px;*/
+/*  height: 50px;*/
+/*}*/
