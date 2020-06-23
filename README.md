@@ -8,4 +8,4 @@ In this particular project/playground, I will expand my knowledge about awesome 
 * Emotion
 * Axios
 * JSONPlaceholder
-* Tailwind CSS
+
