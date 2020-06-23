@@ -25,7 +25,6 @@ export function Navigation () {
                     onMouseLeave={() => set({ xys: [0, 0, 1] })}
                     style={{ transform: props.xys.interpolate(trans) }}
                 />
-
            </Link> </li>
            <li className="nav__link">       <Link to="/menu">Menu</Link> </li>
        </ul>

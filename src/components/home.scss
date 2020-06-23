@@ -1,0 +1,27 @@
+@import '../styles/varibles';
+.home{
+  padding-top: 250px;
+  height: 200vh;
+}
+.hero{
+  text-align: center;
+
+  &__header{
+    font-family: $secondary-font;
+  }
+
+  &__img{
+    position: relative;
+    height: 300px;
+    margin: 3em 1em;
+    cursor: pointer;
+    z-index: 2;
+  }
+}
+.bg__element{
+  position: fixed;
+  width: 100%;
+  &--icon{
+  }
+
+}
