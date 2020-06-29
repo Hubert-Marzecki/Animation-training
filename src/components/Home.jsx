@@ -15,29 +15,33 @@ export function Home() {
     function randomNum(amount) {
         return Math.floor(Math.random() * amount)
     }
-    const interp = i => r => `translate3d(0, ${15 * Math.sin(r + (i * 2 * Math.PI) / 1.6)}px, 0)`
-    const { radians } = useSpring({
+
+
+    const motion = useSpring({
+        from: {top: `${randomNum(10) * randomNum(2)}vh`,
+    },
         to: async next => {
-            while (1) await next({ radians: 2 * Math.PI })
+            while(1) {
+                await next({top:  `${randomNum(50) * randomNum(2)}vh`})
+            }
         },
-        from: { radians: 0 },
-        config: { duration: 3500 },
-        reset: true,
+        config: {duration: 1500}
     })
+
 return (
     <div className="home">
         <div className="bg__element">
 
-            {bgImages.slice(0,2).sort(() => Math.random() - 0.5).map((item) => {
+            {bgImages.slice(0,2).sort(() => Math.random() - 0.5).map((item, index) => {
                 return (
-                    <img className={css`
+                    <animated.img className={css`
                         position: absolute;
                         height: ${randomNum(30) * randomNum(7) + 50}px;
-                        left: ${randomNum(300)}px;
-                        top: ${randomNum(40) * randomNum(2)}vh;
+                        top: ${randomNum(40) * randomNum(2)}vh ;
+                        left: ${randomNum(30) * randomNum(2)}vw ;
                         z-index: -1;
                     `} src={item}
-
+                        style={motion}
                     />
                 )
             })}
