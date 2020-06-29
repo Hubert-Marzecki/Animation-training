@@ -8,6 +8,7 @@ import Sushi5 from '../assets/sushi(4).svg'
 import {useSpring, useTrail, animated} from 'react-spring'
 
 import { css, cx } from 'emotion';
+const dur = 7000;
 
 export function Home() {
 
@@ -16,17 +17,34 @@ export function Home() {
         return Math.floor(Math.random() * amount)
     }
 
-
     const motion = useSpring({
-        from: {top: `${randomNum(10) * randomNum(2)}vh`,
+        from: {left: `-400px`,
     },
         to: async next => {
             while(1) {
-                await next({top:  `${randomNum(50) * randomNum(2)}vh`})
+                await next({left:  `2000`})
+                await next({left:  `-400`})
             }
         },
-        config: {duration: 1500}
+        config: {duration: dur},
+        reset: true,
     })
+    const motionBack = useSpring({
+        from: {left: `2000px`, opacity: "0.5"
+    },
+        to: async next => {
+            while(1) {
+                await next({left:  `-400`, opacity:`0`})
+                await next({left:  `2000`})
+            }
+        },
+        config: {duration: dur},
+        reset: true,
+    })
+    const calc = (x, y) => [-(y - window.innerHeight / 2) / 20, (x - window.innerWidth / 2) / 20, 1.1]
+    const trans = (x, y, s) => `perspective(600px) rotateX(${x}deg) rotateY(${y}deg) scale(${s})`
+    const [props, set] = useSpring(() => ({ xys: [0, 0, 1], config: { mass: 5, tension: 350, friction: 40 } }))
+
 
 return (
     <div className="home">
@@ -36,9 +54,9 @@ return (
                 return (
                     <animated.img className={css`
                         position: absolute;
+                        opacity: 0.3 ;
                         height: ${randomNum(30) * randomNum(7) + 50}px;
-                        top: ${randomNum(40) * randomNum(2)}vh ;
-                        left: ${randomNum(30) * randomNum(2)}vw ;
+                        top: ${index*200*randomNum(3)}px ;
                         z-index: -1;
                     `} src={item}
                         style={motion}
@@ -46,24 +64,33 @@ return (
                 )
             })}
 
-            {bgImages.slice(1,4).sort(() => Math.random() - 0.5).map((item, index) => {
+            {bgImages.slice(2,5).sort(() => Math.random() - 0.5).map((item, index) => {
                 return (
-                    <img className={css`
+                    <animated.img className={css`
                         position: absolute;
                         height: ${randomNum(30) * randomNum(7) + 50}px;
-                        top: ${randomNum(40) * randomNum(2)}vh;
-                        right: ${randomNum(300)}px ;
+                        top: ${index*200*randomNum(3)}px ;
                         z-index: -1;
-                    `} src={item} />
+                    `} src={item} 
+                    style={motionBack}
+                    />
                 )
-            })}
+            })} 
 
         </div>
-
-        <div className="hero">
         <h1 className="hero__header"> THE BEST YOU CAN FIND </h1>
-        <img className="hero__img" src="https://img.freepik.com/darmowe-zdjecie/lososiowy-sushi-z-zielonym-wasabi-na-czarnym-talerzu-lub-danie-i-sosem-shoyu-na-czarnym-tle_85778-94.jpg?size=626&ext=jpg" />
-        <img className="hero__img" src="https://img.freepik.com/darmowe-zdjecie/japonskie-jedzenie-maki-i-nigiri-suszi-ustawiajacy-na-czarnej-tlo-odgornego-widoku-kopii-przestrzeni_123827-2338.jpg?size=626&ext=jpg" />
+        <div className="hero">
+ 
+        <animated.img 
+        className="hero__img" 
+        src="https://img.freepik.com/darmowe-zdjecie/lososiowy-sushi-z-zielonym-wasabi-na-czarnym-talerzu-lub-danie-i-sosem-shoyu-na-czarnym-tle_85778-94.jpg?size=626&ext=jpg" />
+        
+        <animated.img className="hero__img" 
+        onMouseMove={({ clientX: x, clientY: y }) => set({ xys: calc(x, y) })}
+        onMouseLeave={() => set({ xys: [0, 0, 1] })}
+        style={{ transform: props.xys.interpolate(trans) }}
+
+        src="https://img.freepik.com/darmowe-zdjecie/japonskie-jedzenie-maki-i-nigiri-suszi-ustawiajacy-na-czarnej-tlo-odgornego-widoku-kopii-przestrzeni_123827-2338.jpg?size=626&ext=jpg" />
         <img className="hero__img" src="https://www.hashisushi.pl/wp-content/uploads/futomaki-18.png" />
         </div>
     </div>
