@@ -18,11 +18,11 @@ export function Home() {
     }
 
     const motion = useSpring({
-        from: {left: `-400px`,
+        from: {left: `-400px`, opacity: "0.3"
     },
         to: async next => {
             while(1) {
-                await next({left:  `2000`})
+                await next({left:  `2000`, opacity:`0`})
                 await next({left:  `-400`})
             }
         },
@@ -30,7 +30,7 @@ export function Home() {
         reset: true,
     })
     const motionBack = useSpring({
-        from: {left: `2000px`, opacity: "0.5"
+        from: {left: `2000px`, opacity: "0.3"
     },
         to: async next => {
             while(1) {
@@ -43,18 +43,18 @@ export function Home() {
     })
     const calc = (x, y) => [-(y - window.innerHeight / 2) / 20, (x - window.innerWidth / 2) / 20, 1.1]
     const trans = (x, y, s) => `perspective(600px) rotateX(${x}deg) rotateY(${y}deg) scale(${s})`
-    const [props, set] = useSpring(() => ({ xys: [0, 0, 1], config: { mass: 5, tension: 350, friction: 40 } }))
+    const [props, set] = useSpring(() => ({ xys: [0, 0, 1], config: { mass: 1, tension: 350, friction: 40 } }))
 
 
 return (
     <div className="home">
         <div className="bg__element">
 
-            {bgImages.slice(0,2).sort(() => Math.random() - 0.5).map((item, index) => {
+            {/* {bgImages.slice(0,2).sort(() => Math.random() - 0.5).map((item, index) => {
                 return (
                     <animated.img className={css`
                         position: absolute;
-                        opacity: 0.3 ;
+                        opacity: 0.3;
                         height: ${randomNum(30) * randomNum(7) + 50}px;
                         top: ${index*200*randomNum(3)}px ;
                         z-index: -1;
@@ -75,23 +75,12 @@ return (
                     style={motionBack}
                     />
                 )
-            })} 
+            })}  */}
 
         </div>
         <h1 className="hero__header"> THE BEST YOU CAN FIND </h1>
         <div className="hero">
- 
-        <animated.img 
-        className="hero__img" 
-        src="https://img.freepik.com/darmowe-zdjecie/lososiowy-sushi-z-zielonym-wasabi-na-czarnym-talerzu-lub-danie-i-sosem-shoyu-na-czarnym-tle_85778-94.jpg?size=626&ext=jpg" />
-        
-        <animated.img className="hero__img" 
-        onMouseMove={({ clientX: x, clientY: y }) => set({ xys: calc(x, y) })}
-        onMouseLeave={() => set({ xys: [0, 0, 1] })}
-        style={{ transform: props.xys.interpolate(trans) }}
-
-        src="https://img.freepik.com/darmowe-zdjecie/japonskie-jedzenie-maki-i-nigiri-suszi-ustawiajacy-na-czarnej-tlo-odgornego-widoku-kopii-przestrzeni_123827-2338.jpg?size=626&ext=jpg" />
-        <img className="hero__img" src="https://www.hashisushi.pl/wp-content/uploads/futomaki-18.png" />
+      
         </div>
     </div>
 )
