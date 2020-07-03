@@ -17,16 +17,17 @@ export function Navigation () {
 
     return (
        <ul className="nav">
-           <li className="nav__link"><Link to="/about"> About </Link> </li>
-           <li className="nav__link"
+            <li className="nav__link"
              >
                <Link to="/" >
-               <animated.img className="nav__link nav__link--img" src={Sushi1}
+               <animated.img className="nav__link nav__link--img" src={'https://i.pinimg.com/originals/75/ef/3e/75ef3e44262f68e3627603ebd75ca0e5.png'}
                     onMouseMove={({ clientX: x, clientY: y }) => set({ xys: calc(x, y) })}
                     onMouseLeave={() => set({ xys: [0, 0, 1] })}
                     style={{ transform: props.xys.interpolate(trans) }}
                 />
            </Link> </li>
+           <li className="nav__link"><Link to="/about"> About </Link> </li>
+          
            <li className="nav__link">       <Link to="/menu">Menu</Link> </li>
        </ul>
 

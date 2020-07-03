@@ -2,11 +2,12 @@
 .home{
   padding-top: 250px;
   height: 200vh;
-  background-color: black;
-  color:white;
+  background-color: $background-color;
+  color: $text-color;
 }
 .hero{
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
 
   &__header{
