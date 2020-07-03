@@ -12,8 +12,7 @@ import { useState } from "react";
 const dur = 7000;
 
 export function Home() {
-    const bg = "https://img.freepik.com/darmowe-zdjecie/zroznicowany-stol-do-sushi-widziany-z-gory_136960-135.jpg?size=626&ext=jpghttps://a-static.besthdwallpaper.com/sushi-thai-food-tapeta-3554x1999-3589_53.jpg"
-    const icons = [[Sushi1, "ONE"], [Sushi2,"TWO"], [Sushi3, "THREE"], [Sushi4, "FOUR"], [Sushi5, "FIVE" ]]
+    const bg = "https://cdn.statically.io/img/free4kwallpapers.com/uploads/originals/2019/10/29/city-of-japan-wallpaper.jpg"
     const mainFont = `'Krona One', sans-serif`;
     const [flipped, set] = useState({
         one: true,
@@ -27,23 +26,6 @@ export function Home() {
       config: { mass: 5, tension: 500, friction: 80 }
     })
  
-    const iconDisplay = icons.map(([itemImg, itemName]) => {
-        return (
-            <div className={css`
-            display:flex;
-            flex-direction: column;
-            `}>
-         
-            <img src={itemImg} className={css`
-            width:100px; 
-            margin: 3em;
-            `} />
-            <p className={css`text-align:center; font-family: ${mainFont}`}> {itemName}</p>
-           </div>
-        )
-       
-    })
-
     const linkHome = css`
     margin: 1em; 
     font-size: 40px ; 
@@ -51,25 +33,29 @@ export function Home() {
     font-family: ${mainFont};
     cursor: pointer; 
     text-decoration: overline;
+    }
 }
 
      `;
 
 return (
-    <>
-     <div>
+<div>
+    {/* img  */}
+     <>
       <a.div className={css` 
-      background-image: url(${bg}); 
+      background-image: url("https://pm1.narvii.com/6375/7c1d306ae58f6881abe7b386e70f7c915aaae937_hq.jpg");
+      background-size: cover;
+      background-attachment: fixed;
       position: absolute;
-      width: 40ch;
-      height: 40ch;
+      width: 20ch;
+      height: 30ch;
       left:10%;
-      top:25%;
+      top:35%;
       cursor: pointer;
       will-change: transform, opacity;
       `} style={{ opacity: opacity.interpolate(o => 1 - o), transform }} />
       <a.div class={css``} style={{ opacity, transform: transform.interpolate(t => `${t} rotateX(180deg)`) }} />
-    </div>
+    </>
 
 
     <div className={css` 
@@ -77,7 +63,7 @@ return (
     color: $text-color;
     background-image: url(${bg});
     background-size: cover;
-    backdrop-filter: grayscale(0.9) opacity(0.8) 
+    background-blend-mode: darken;
     `
     }>
       
@@ -95,7 +81,7 @@ return (
         }>
     
 
-        <span className={linkHome} onClick={() => set((s) => {return {...s, one: !s.one}})} >MENU</span>  
+        <span className={linkHome} onMouseEnter={() => set((s) => {return {...s, one: !s.one}})}onMouseLeave={() => set((s) => {return {...s, one: !s.one}})} >MENU</span>  
         <span className={linkHome}>KONTAKT</span>    
         <span className={linkHome}>ZAMÓW</span>              
         </div>
@@ -103,7 +89,7 @@ return (
         position: absolute; 
         color:white; 
         left: 50%; 
-        top:90%;
+        top:40%;
         transform:translate(-50%, -50%);
         font-family: ${mainFont};
         font-size: 10px;
@@ -112,6 +98,6 @@ return (
 123 Fake Street — Seattle, WA — 206-555-7890
 </p>
     </div>
-    </>
+    </div >
 )
 }

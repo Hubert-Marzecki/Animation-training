@@ -1,6 +1,6 @@
 import React from 'react';
 import './nav.scss';
-import Sushi1 from '../assets/sushi.svg'
+import SushiLog from '../assets/logo_sushi.png'
 import {
     Link
 } from "react-router-dom";
@@ -20,7 +20,7 @@ export function Navigation () {
             <li className="nav__link"
              >
                <Link to="/" >
-               <animated.img className="nav__link nav__link--img" src={'https://i.pinimg.com/originals/75/ef/3e/75ef3e44262f68e3627603ebd75ca0e5.png'}
+               <animated.img className="nav__link nav__link--img" src={SushiLog}
                     onMouseMove={({ clientX: x, clientY: y }) => set({ xys: calc(x, y) })}
                     onMouseLeave={() => set({ xys: [0, 0, 1] })}
                     style={{ transform: props.xys.interpolate(trans) }}
