@@ -12,14 +12,18 @@ import { useState } from "react";
 const dur = 7000;
 
 export function Home() {
-    const [bg, setBg] = useState("https://img.freepik.com/darmowe-zdjecie/zroznicowany-stol-do-sushi-widziany-z-gory_136960-135.jpg?size=626&ext=jpghttps://a-static.besthdwallpaper.com/sushi-thai-food-tapeta-3554x1999-3589_53.jpg")
-    // const bg = "https://img.freepik.com/darmowe-zdjecie/zroznicowany-stol-do-sushi-widziany-z-gory_136960-135.jpg?size=626&ext=jpghttps://a-static.besthdwallpaper.com/sushi-thai-food-tapeta-3554x1999-3589_53.jpg"
+    const bg = "https://img.freepik.com/darmowe-zdjecie/zroznicowany-stol-do-sushi-widziany-z-gory_136960-135.jpg?size=626&ext=jpghttps://a-static.besthdwallpaper.com/sushi-thai-food-tapeta-3554x1999-3589_53.jpg"
     const icons = [[Sushi1, "ONE"], [Sushi2,"TWO"], [Sushi3, "THREE"], [Sushi4, "FOUR"], [Sushi5, "FIVE" ]]
     const mainFont = `'Krona One', sans-serif`;
-    const [flipped, set] = useState(true)
+    const [flipped, set] = useState({
+        one: true,
+        two: true 
+    })
+
+    // zparametryzować
     const { transform, opacity } = useSpring({
-      opacity: flipped ? 1 : 0,
-      transform: `perspective(600px) rotateX(${flipped ? 180 : 0}deg)`,
+      opacity: flipped.one ? 1 : 0,
+      transform: `perspective(600px) rotateX(${flipped.one ? 180 : 0}deg)`,
       config: { mass: 5, tension: 500, friction: 80 }
     })
  
@@ -47,9 +51,6 @@ export function Home() {
     font-family: ${mainFont};
     cursor: pointer; 
     text-decoration: overline;
-    &:hover{
-        ${() => setBg("https://a-static.besthdwallpaper.com/sushi-thai-food-tapeta-3554x1999-2852_53.jpg")}
-    }
 }
 
      `;
@@ -94,7 +95,7 @@ return (
         }>
     
 
-        <span className={linkHome} onMouseEnter={() => set(state => !state)} onMouseLeave={() => set(state => !state)}>MENU</span>  
+        <span className={linkHome} onClick={() => set((s) => {return {...s, one: !s.one}})} >MENU</span>  
         <span className={linkHome}>KONTAKT</span>    
         <span className={linkHome}>ZAMÓW</span>              
         </div>
