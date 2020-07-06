@@ -8,7 +8,8 @@ import Sushi5 from '../assets/sushi(4).svg'
 import edo from '../assets/edo.jpg';
 import edoTwo from '../assets/sushi-menu.jpg';
 import motoOne from '../assets/moto1.png'
-
+import waterDrop from '../assets/water-drop.mp3'
+import { Howler, Howl } from 'howler'
 import {useSpring, useTrail, animated as a} from 'react-spring';
 import useMeasure from 'react-use-measure'
 
@@ -26,12 +27,49 @@ export function Home() {
         menuItem: true,
         contactItem: false,
         orderItem: false,
+        soundOne: false,
     })
     const { transform, opacity } = useSpring({
       opacity: animationTrigger.menuItem ? 1 : 0,
       transform: `perspective(600px) rotateX(${animationTrigger.menuItem ? 180 : 0}deg)`,
       config: { mass: 5, tension: 500, friction: 80 }
     })
+
+
+    // Audio added
+    const audioClip = [
+      {sound: `https://raw.githubusercontent.com/goldfire/howler.js/master/examples/player/audio/80s_vibe.mp3`, label: "Future Asia"},
+      {sound: "https://www.youtube.com/watch?v=pBOKeVsiJho", label: "Old Asia"}
+  ]
+
+      const sound = new Howl ({
+          src: ["https://raw.githubusercontent.com/goldfire/howler.js/master/examples/player/audio/80s_vibe.mp3"],
+          html5: true,
+          onstop:  () => {},
+          volume: 1
+      })
+    
+    function soundTriggerHolder (soundObj) {
+      setAnimationTrigger((s) => ({...s, soundOne: !s.soundOne}));
+      if(animationTrigger.soundOne) {
+      } 
+      sound.play()
+    }
+
+    const RenderButtonSound = () => {
+      return audioClip.map((soundObj, index) => {
+        return (
+          <button 
+          className={css`font-size: 300px`}
+          key={index}
+          onClick={() => soundTriggerHolder(soundObj)}>
+          
+          {soundObj.label}
+          
+          </button>
+        )
+      })
+    }
 
 
     //  styles 
@@ -157,6 +195,7 @@ return (
         >ZAMÓW</h2>  
                
         </div>
+        {RenderButtonSound()}
    
     </div>
     </div >
