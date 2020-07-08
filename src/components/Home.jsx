@@ -15,6 +15,7 @@ import useMeasure from 'react-use-measure'
 
 import { css, cx } from 'emotion';
 import { useState } from "react";
+import { useEffect } from "react";
 const dur = 7000;
 
 
@@ -45,15 +46,20 @@ export function Home() {
       const sound = new Howl ({
           src: ["https://raw.githubusercontent.com/goldfire/howler.js/master/examples/player/audio/80s_vibe.mp3"],
           html5: true,
-          onstop:  () => {},
-          volume: 1
+          volume: 1,
       })
+      
+    useEffect(() => {
+          sound.play()
+       
+    },[])
+
     
     function soundTriggerHolder (soundObj) {
       setAnimationTrigger((s) => ({...s, soundOne: !s.soundOne}));
       if(animationTrigger.soundOne) {
-      } 
-      sound.play()
+        sound.play()
+      } else{ Howler.stop();}
     }
 
     const RenderButtonSound = () => {
@@ -63,7 +69,6 @@ export function Home() {
           className={css`font-size: 300px`}
           key={index}
           onClick={() => soundTriggerHolder(soundObj)}>
-          
           {soundObj.label}
           
           </button>
