@@ -9,13 +9,14 @@ import edo from '../assets/edo.jpg';
 import edoTwo from '../assets/sushi-menu.jpg';
 import motoOne from '../assets/moto1.png'
 import waterDrop from '../assets/water-drop.mp3'
+import playIcon from '../assets/pngguru.com.png'
 import { Howler, Howl } from 'howler'
 import {useSpring, useTrail, animated as a} from 'react-spring';
 import useMeasure from 'react-use-measure'
-
 import { css, cx } from 'emotion';
 import { useState } from "react";
 import { useEffect } from "react";
+import Menu from './Menu'
 const dur = 7000;
 
 
@@ -28,7 +29,6 @@ export function Home() {
         menuItem: true,
         contactItem: false,
         orderItem: false,
-        soundOne: false,
     })
     const { transform, opacity } = useSpring({
       opacity: animationTrigger.menuItem ? 1 : 0,
@@ -54,28 +54,36 @@ export function Home() {
        
     },[])
 
-    
-    function soundTriggerHolder (soundObj) {
-      setAnimationTrigger((s) => ({...s, soundOne: !s.soundOne}));
-      if(animationTrigger.soundOne) {
-        sound.play()
-      } else{ Howler.stop();}
-    }
+   
 
     const RenderButtonSound = () => {
-      return audioClip.map((soundObj, index) => {
+     
         return (
-          <button 
-          className={css`font-size: 300px`}
-          key={index}
-          onClick={() => soundTriggerHolder(soundObj)}>
-          {soundObj.label}
-          
-          </button>
-        )
-      })
-    }
+          <div  className={css`
+          position:absolute;
+          top:90%;
+          left:90%;
+          cursor: pointer;
+          color:white;
+          text-align:center;
+          font-family: ${mainFont};
+          @media (max-width: 600px) {
+            left: 50%;
+            transform: translate(-50%)
+          }
+         
 
+          `}>
+          <p
+          className={css`padding:10px`}> FEEL THE WIBE </p>
+            <img src={playIcon} 
+           className={css`width:40px`}
+            onClick={() => sound.play()}
+              />
+
+            </div>
+        )
+        }
 
     //  styles 
     const linkHome = css`
@@ -133,18 +141,9 @@ return (
       will-change: transform, opacity;
       `} />
 
-    {/*  MOTO ONE */}
-    <a.div className={css` 
-      background-image: url(${motoOne});
-      ${animatedImg}
-      width: 100px;
-      height: 100px;
-      left:50%;
-      top:90%;
-      transition: opacity 0.5s;
-      cursor: none;
-      will-change: transform, opacity;
-      `}  />
+      {/* MENU */}
+     <Menu />
+
 
 
     {/* APP */}
@@ -169,35 +168,36 @@ return (
             transform:translate(-50%, -50%)
             `
         }>
-                {/*  ADRRESS  */}
-                <h2 className={css`
-                width: 100%; 
-                text-align:center;   
-                font-family: ${mainFont};
-                font-size: 10px;
-                color:white;
-                `}>123 Fake Street — Seattle, WA — 206-555-7890
-                </h2> 
-        
+        {/*  ADRRESS  */}
+            <h2 className={css`
+            width: 100%; 
+            text-align:center;   
+            font-family: ${mainFont};
+            font-size: 10px;
+            color:white;
+            `}>123 Fake Street — Seattle, WA — 206-555-7890
+            </h2> 
 
-            {/*  MENU LINK */}
-            <h2 className={linkHome} 
-                onMouseEnter={() => setAnimationTrigger((s) => {return {...s, menuItem: !s.menuItem}})}
-                onMouseLeave={() => setAnimationTrigger((s) => {return {...s, menuItem: !s.menuItem}})} 
-                >
-                    MENU
-            </h2>  
 
+        {/*  ZPARAMETRYZOWAĆ  */}
+        {/*  MENU LINK */}
+        <h2 className={linkHome} 
+            onMouseEnter={() => setAnimationTrigger((s) => {return {...s, menuItem: !s.menuItem}})}
+            onMouseLeave={() => setAnimationTrigger((s) => {return {...s, menuItem: !s.menuItem}})} 
+            > MENU
+        </h2>  
         {/*  KOTNAKT LINK */}
         <h2 className={linkHome}  
         onMouseEnter={() => setAnimationTrigger((s) => {return {...s, contactItem: true}})}
         onMouseLeave={() => setAnimationTrigger((s) => {return {...s, contactItem: false}})} 
-         >KONTAKT</h2>  
+         >KONTAKT
+         </h2>  
           {/* ZAMÓW LINK */}
         <h2 className={linkHome}
          onMouseEnter={() => setAnimationTrigger((s) => {return {...s, orderItem: true}})}
          onMouseLeave={() => setAnimationTrigger((s) => {return {...s, orderItem: false}})} 
-        >ZAMÓW</h2>  
+        >ZAMÓW
+        </h2>  
                
         </div>
         {RenderButtonSound()}
