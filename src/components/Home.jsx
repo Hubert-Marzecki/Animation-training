@@ -17,73 +17,31 @@ import { css, cx } from 'emotion';
 import { useState } from "react";
 import { useEffect } from "react";
 import Menu from './Menu'
-const dur = 7000;
+import ButtonSound from './ButtonSound';
 
 
 export function Home() {
+  const [animationTrigger, setAnimationTrigger] = useState({
+    menuItem: true,
+    contactItem: false,
+    orderItem: false,
+})
+
     const bg = "https://cdn.statically.io/img/free4kwallpapers.com/uploads/originals/2019/10/29/city-of-japan-wallpaper.jpg"
     const mainFont = `'Krona One', sans-serif`;
+    const dur = 7000;
 
-    // used with first menu item
-    const [animationTrigger, setAnimationTrigger] = useState({
-        menuItem: true,
-        contactItem: false,
-        orderItem: false,
-    })
+  
     const { transform, opacity } = useSpring({
       opacity: animationTrigger.menuItem ? 1 : 0,
       transform: `perspective(600px) rotateX(${animationTrigger.menuItem ? 180 : 0}deg)`,
       config: { mass: 5, tension: 500, friction: 80 }
     })
 
+ 
 
-    // Audio added
-    const audioClip = [
-      {sound: `https://raw.githubusercontent.com/goldfire/howler.js/master/examples/player/audio/80s_vibe.mp3`, label: "Future Asia"},
-      {sound: "https://www.youtube.com/watch?v=pBOKeVsiJho", label: "Old Asia"}
-  ]
-
-      const sound = new Howl ({
-          src: ["https://raw.githubusercontent.com/goldfire/howler.js/master/examples/player/audio/80s_vibe.mp3"],
-          html5: true,
-          volume: 1,
-      })
-      
-    useEffect(() => {
-          sound.play()
-       
-    },[])
 
    
-
-    const RenderButtonSound = () => {
-     
-        return (
-          <div  className={css`
-          position:absolute;
-          top:90%;
-          left:90%;
-          cursor: pointer;
-          color:white;
-          text-align:center;
-          font-family: ${mainFont};
-          @media (max-width: 600px) {
-            left: 50%;
-            transform: translate(-50%)
-          }
-         
-
-          `}>
-          <p
-          className={css`padding:10px`}> FEEL THE WIBE </p>
-            <img src={playIcon} 
-           className={css`width:40px`}
-            onClick={() => sound.play()}
-              />
-
-            </div>
-        )
-        }
 
     //  styles 
     const linkHome = css`
@@ -142,7 +100,10 @@ return (
       `} />
 
       {/* MENU */}
-     <Menu />
+     <Menu 
+      zIndex={1}
+      opacity={0}
+     />
 
 
 
@@ -200,7 +161,7 @@ return (
         </h2>  
                
         </div>
-        {RenderButtonSound()}
+        {ButtonSound()}
    
     </div>
     </div >
