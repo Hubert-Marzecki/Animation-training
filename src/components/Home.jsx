@@ -18,7 +18,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import Menu from './Menu'
 import ButtonSound from './ButtonSound';
-
+import {mainFont,bg} from '../styles/varibleCSS'
 
 export function Home() {
   const [animationTrigger, setAnimationTrigger] = useState({
@@ -28,9 +28,7 @@ export function Home() {
     menuVisible: false
 })
 
-    const bg = "https://cdn.statically.io/img/free4kwallpapers.com/uploads/originals/2019/10/29/city-of-japan-wallpaper.jpg"
-    const mainFont = `'Krona One', sans-serif`;
-    const dur = 7000;
+ 
 
   
     const { transform, opacity } = useSpring({
@@ -61,13 +59,10 @@ export function Home() {
      `
     
     //  MENU BUTTON DISPALY MENU
-const menuDisplayAnimation = `opacity:1; z-index:1; width: 100%`
-
+  const menuDisplayAnimation = `opacity:1; z-index:1; width: 100%`
   const menuStatic = `opacity:0; z-index:-1; width: 0%`
-
   // MENU ACTION MOVE MENUHOLDER
   const menuHolderMove = `top:90%;`;
-
   const menuHolderStatic = `top:50%;`
 
 return (
