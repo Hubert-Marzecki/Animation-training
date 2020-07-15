@@ -1,6 +1,7 @@
 import React from "react";
 import { css, cx } from 'emotion';
 import menu from './menu.scss'
+import {useSpring, useTrail, animated as a} from 'react-spring';
 
 
 const caption = css`
@@ -20,19 +21,21 @@ float:right; padding-left:1em
 
 
 export function Menu (props) {
+  console.log(props.style);
     return(
-      <div
+      <a.div
       className={
         css`
         position:absolute;
-        z-index: ${props.zIndex};
-        opacity: ${props.opacity};
         width:100%;
         background-color:black;
         height: 100vh;
-       
+        ${props.style};
+        will-change: opacity, z-index;
+        transition: opacity 0.3s;
         `
       }
+      
       >
 
         <div className={css`
@@ -60,7 +63,7 @@ export function Menu (props) {
         </h3>
         <p className={caption}>A well-written, appetite inspiring description that aims to inform the information and food deprived consumer</p>
       </div>
-      </div>
+      </a.div>
     )
 }
 export default Menu;

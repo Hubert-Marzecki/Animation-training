@@ -25,6 +25,7 @@ export function Home() {
     menuItem: true,
     contactItem: false,
     orderItem: false,
+    menuVisible: false
 })
 
     const bg = "https://cdn.statically.io/img/free4kwallpapers.com/uploads/originals/2019/10/29/city-of-japan-wallpaper.jpg"
@@ -38,11 +39,6 @@ export function Home() {
       config: { mass: 5, tension: 500, friction: 80 }
     })
 
- 
-
-
-   
-
     //  styles 
     const linkHome = css`
     margin: 1em; 
@@ -51,6 +47,8 @@ export function Home() {
     font-family: ${mainFont};
     cursor: pointer; 
     text-decoration: overline;
+    z-index:100;
+
      `;
 
      const animatedImg=css`
@@ -62,7 +60,15 @@ export function Home() {
      cursor: pointer;
      `
     
+    //  MENU BUTTON DISPALY MENU
+const menuDisplayAnimation = `opacity:1; z-index:1; width: 100%`
 
+  const menuStatic = `opacity:0; z-index:-1; width: 0%`
+
+  // MENU ACTION MOVE MENUHOLDER
+  const menuHolderMove = `top:90%;`;
+
+  const menuHolderStatic = `top:50%;`
 
 return (
 <div>
@@ -74,8 +80,8 @@ return (
       left:20%;
       top:35%;
       will-change: transform, opacity;
-      `} style={{ opacity: opacity.interpolate(o => 1 - o), transform }} />
-      <a.div className={css``} style={{ opacity, transform: transform.interpolate(t => `${t} rotateX(180deg)`) }} />
+      `} style={{ opacity: opacity.interpolate(o => 1 - o)}} />
+      <a.div className={css``} style={{ opacity }} />
     </>
 
     {/* IMG KONTAKT */}
@@ -83,7 +89,7 @@ return (
       background-image: url(${edo});
       ${animatedImg}
       left:40%;
-      ${animationTrigger.contactItem ? `top:50%;` : `top: 100%;`}
+      ${animationTrigger.contactItem ? `top:50%;` : `top: 100%;`};
       transition: top 1s;
       will-change: transform, opacity;
       `} />
@@ -94,15 +100,14 @@ return (
       ${animatedImg}
       left:70%;
       top:30%;
-      ${animationTrigger.orderItem ? `opacity:1;` : `opacity:0;`}
+      ${animationTrigger.orderItem ? `opacity:1;` : `opacity:0;`};
       transition: opacity 0.5s;
       will-change: transform, opacity;
       `} />
 
       {/* MENU */}
      <Menu 
-      zIndex={1}
-      opacity={0}
+      style={animationTrigger.menuVisible ?  menuDisplayAnimation : menuStatic}
      />
 
 
@@ -118,17 +123,22 @@ return (
     }>
       
         {/* MENU HOLDER */}
-        <div className={
+        <a.div className={
             css`
             position: relative;
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
             left:50%;
-            top:50%;
-            transform:translate(-50%, -50%)
+            transform:translate(-50%, -50%);
+            ${animationTrigger.menuVisible ? menuHolderMove : menuHolderStatic}
+            will-change: top;
+            transition: top 0.5s;
+            z-index:100;
             `
-        }>
+        }
+        // style={animationTrigger.menuVisible ? menuHolderMove : menuHolderStatic}
+        >
         {/*  ADRRESS  */}
             <h2 className={css`
             width: 100%; 
@@ -136,7 +146,7 @@ return (
             font-family: ${mainFont};
             font-size: 10px;
             color:white;
-            `}>123 Fake Street — Seattle, WA — 206-555-7890
+            `}> 123 Fake Street — Seattle, WA — 206-555-7890
             </h2> 
 
 
@@ -145,6 +155,7 @@ return (
         <h2 className={linkHome} 
             onMouseEnter={() => setAnimationTrigger((s) => {return {...s, menuItem: !s.menuItem}})}
             onMouseLeave={() => setAnimationTrigger((s) => {return {...s, menuItem: !s.menuItem}})} 
+            onClick={(e) => setAnimationTrigger((s) => ({...s, menuVisible: !s.menuVisible}) )} 
             > MENU
         </h2>  
         {/*  KOTNAKT LINK */}
@@ -159,8 +170,8 @@ return (
          onMouseLeave={() => setAnimationTrigger((s) => {return {...s, orderItem: false}})} 
         >ZAMÓW
         </h2>  
-               
-        </div>
+              
+        </a.div>
         {ButtonSound()}
    
     </div>

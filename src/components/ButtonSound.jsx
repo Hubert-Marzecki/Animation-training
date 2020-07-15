@@ -22,9 +22,9 @@ const mainFont = `'Krona One', sans-serif`;
             volume: 1,
         })
         
-      useEffect(() => {
-            sound.play()
-      },[])
+      // useEffect(() => {
+      //       sound.play()
+      // },[])
 
     return (
       <div  className={css`
